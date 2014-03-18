@@ -41,10 +41,13 @@ fi
 # Create project, generate makefiles and build.
 echo "Creating project:" $PROJECT_NAME
 
+if [ ! -d ./projects/cpp ]; then
+    mkdir -p ./projects/cpp
+fi
 
-pushd ./cpp
+pushd ./projects/cpp
 mkdir $PROJECT_NAME
-cp template/* $PROJECT_NAME
+cp ../../templates/cpp/* $PROJECT_NAME
 
 pushd $PROJECT_NAME
 
