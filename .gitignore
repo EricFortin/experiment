@@ -4,3 +4,6 @@
 
 # Local config files.
 *.experiment_config
+
+# Generated projects
+projects
