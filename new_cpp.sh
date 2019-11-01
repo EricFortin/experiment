@@ -4,7 +4,7 @@
 source cpp/.experiment_config
 
 # Define default options.
-NO_BOOST=false
+USE_BOOST=false
 
 
 usage() {
@@ -19,8 +19,8 @@ while test $# -gt 0; do
         -h|--help)
             usage
             ;;
-        --no-boost)
-            NO_BOOST=true
+        --use-boost)
+            USE_BOOST=true
             shift
             ;;
         --boost-version)
@@ -51,19 +51,14 @@ cp ../../templates/cpp/* $PROJECT_NAME
 
 pushd $PROJECT_NAME
 
-if $NO_BOOST ; then
-    echo "Excluding boost library."
-    CMAKE_ARGUMENTS="$CMAKE_ARGUMENTS -DNO_BOOST=ON"
-else
+if $USE_BOOST ; then
     echo "Using Boost version: $BOOST_VERSION"
-    CMAKE_ARGUMENTS="$CMAKE_ARGUMENTS -DBOOST_PATH=$BOOST_PATH/$BOOST_VERSION/"
+    CMAKE_ARGUMENTS="$CMAKE_ARGUMENTS -DUSE_BOOST=ON -DBOOST_PATH=$BOOST_PATH/$BOOST_VERSION/"
+else
+    CMAKE_ARGUMENTS="$CMAKE_ARGUMENTS"
 fi
 
 echo "CMAKE_ARGUMENTS: $CMAKE_ARGUMENTS"
 
 cmake $CMAKE_ARGUMENTS .
 make
-./experiment
-
-gvim main.cpp &
-

@@ -2,9 +2,9 @@ cmake_minimum_required (VERSION 2.8)
 
 project (experiment)
 
-message("Boost: ${NO_BOOST}, ${BOOST_PATH}")
+message("Boost: ${USE_BOOST}, ${BOOST_PATH}")
 
-if ((NOT ${NO_BOOST}) OR (NOT DEFINED(NO_BOOST)))
+if (${USE_BOOST})
     include_directories("${BOOST_PATH}")
 endif()
 
